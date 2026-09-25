@@ -15,3 +15,14 @@ expensive = list(
 )
 print("expensive",expensive)
 
+# sorted 
+# ascending
+numbers = [5, 2, 8, 1, 3]
+result = sorted(numbers)
+print(result)
+
+
+# Descending
+numbers = [5, 2, 8, 1, 3]
+result = sorted(numbers, reverse= True)
+print(result)
