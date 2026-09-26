@@ -1,0 +1,11 @@
+PolicyID,Customer,Product,Premium,Coverage,Age,Status
+POL1001,Ravi,Life Protection,25000,1000000,35,Active
+POL1002,Amit,Child Future,40000,2000000,42,Active
+POL1003,Sneha,Life Protection,15000,500000,29,Inactive
+POL1004,Priya,Retirement,60000,3000000,55,Active
+POL1005,Rahul,Child Future,30000,1500000,38,Active
+POL1006,Neha,Life Protection,45000,2500000,41,Active
+POL1007,Sunil,Retirement,55000,2800000,52,Active
+POL1008,Anita,Child Future,22000,1200000,34,Active
+POL1009,Vijay,Life Protection,18000,750000,31,Inactive
+POL1010,Meena,Retirement,70000,4000000,58,Active
