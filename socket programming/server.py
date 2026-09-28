@@ -2,44 +2,67 @@ import socket
 import threading
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(("192.168.1.90", 5000))
+
+server.bind(("192.168.1.86", 5000))
 
 server.listen(5)
 
-print("Server is waiting for client...")
+print("Server is waiting for clients...")
 
-conn, address = server.accept()
 
-print("Client connected!")
-print("Client IP:", address[0])
+def handle_client(conn, address):
 
-# Function to receive messages
-def receive_messages():
-    while True:
-        try:
-            message = conn.recv(1024).decode()
+    print("Client connected:", address[0])
 
-            if not message:
-                print("Client disconnected.")
+    # Receive messages from this client
+    def receive_messages():
+        while True:
+            try:
+                message = conn.recv(1024).decode()
+
+                if not message:
+                    print("Client disconnected:", address[0])
+                    break
+
+                print(f"\nClient {address[0]}: {message}")
+
+            except:
                 break
 
-            print("\nClient:", message)
+        conn.close()
+
+    # Start receiving in background
+    thread = threading.Thread(target=receive_messages)
+    thread.daemon = True
+    thread.start()
+
+    # Send messages to this client
+    while True:
+        try:
+            message = input(f"You → {address[0]}: ")
+
+            if message.lower() == "exit":
+                break
+
+            conn.send(message.encode())
 
         except:
             break
 
-# Start receiving messages in background
-thread = threading.Thread(target=receive_messages)
-thread.daemon = True
-thread.start()
+    conn.close()
 
-# Server sends messages
+
+# Accept multiple clients
 while True:
-    message = input("You: ")
-    if message.lower() == "exit":
-        conn.send("exit".encode())
-        break
-    conn.send(message.encode())
 
-conn.close()
-server.close()
+    conn, address = server.accept()
+
+    thread = threading.Thread(
+        target=handle_client,
+        args=(conn, address)
+    )
+
+    thread.daemon = True
+    thread.start()
+
+    print("Waiting for another client...")
