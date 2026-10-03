@@ -49,22 +49,23 @@ def get_task(task_id:int):
 @app.put("/tasks/{task_id}")
 def update_task(task_id: int, updated_task: dict):
     tasks = read_tasks()
-    
+
     for task in tasks:
         if task["id"] == task_id:
-            
-            task["title"] = update_task["title"]
-            task["completed"] = update_task["completed"]
-            
+
+            task["title"] = updated_task["title"]
+            task["completed"] = updated_task["completed"]
+
             write_tasks(tasks)
-            
-            return{
-                "message":"task updated successfully",
-                "task":task
+
+            return {
+                "message": "task updated successfully",
+                "task": task
             }
-        return{
-            "message":"task not found"
-        }
+
+    return {
+        "message": "task not found"
+    }
 
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int):
