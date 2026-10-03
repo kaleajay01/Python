@@ -1,12 +1,1 @@
-[
-    {
-        "id": 1,
-        "title": "Learn FastAPI",
-        "completed": false
-    },
-    {
-        "id": 2,
-        "title": "FastAPI",
-        "completed": false
-    }
-]
+[]

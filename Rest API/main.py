@@ -33,3 +33,53 @@ def create_task(task: dict):
     }
     
     
+# get one task
+@app.get("/tasks/{task_id}")
+def get_task(task_id:int):
+    tasks = read_tasks()
+    
+    for task in tasks:
+        if task["id"] == task_id:
+            return task
+        
+        return{
+            "message":"Task not found"
+        }
+        
+@app.put("/tasks/{task_id}")
+def update_task(task_id: int, updated_task: dict):
+    tasks = read_tasks()
+    
+    for task in tasks:
+        if task["id"] == task_id:
+            
+            task["title"] = update_task["title"]
+            task["completed"] = update_task["completed"]
+            
+            write_tasks(tasks)
+            
+            return{
+                "message":"task updated successfully",
+                "task":task
+            }
+        return{
+            "message":"task not found"
+        }
+
+@app.delete("/tasks/{task_id}")
+def delete_task(task_id: int):
+    tasks = read_tasks()
+    
+    for task in tasks:
+        if task["id"] == task_id:
+            tasks.remove(task)
+
+            write_tasks(tasks)
+            
+            return{
+                "message":"task deleted successfully"
+            }
+        
+    return{
+            "message"
+        }
