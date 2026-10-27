@@ -2,7 +2,7 @@ from calculator import add, divide
 import pytest
 
 def test_add_two_numbers():
-    assert add(10, 20) == 30
+    assert add(10, 20) == 40
 
 def test_divide_two_numbers():
     assert divide(10, 10) == 1
